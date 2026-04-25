@@ -15,9 +15,6 @@ body {
     min-height: 100vh;
     
     /* Flexbox to perfectly center the card */
-    display: flex;
-    justify-content: center;
-    align-items: center;
     color: #ffffff;
 }
 
