@@ -135,7 +135,7 @@ php setup.php --fresh
 POST /auth/login
 {
   "email": "admin@cafeteria.com",
-  "password": "admin123"
+  "password": "admin12345"
 }
 ```
 
@@ -144,9 +144,9 @@ POST /auth/login
 ```json
 POST /admin/users
 {
-  "name": "Sara Ali",
-  "email": "sara@example.com",
-  "password": "123456",
+  "name": "karim",
+  "email": "karim@example.com",
+  "password": "12345",
   "room_id": 2,
   "role": "customer"
 }
