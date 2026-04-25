@@ -1,4 +1,19 @@
-<?php include __DIR__ . '/includes/header.php'; ?>
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+// If they are already logged in, redirect them to their dashboard
+if (isset($_SESSION['user_role'])) {
+    if ($_SESSION['user_role'] === 'admin') {
+        header("Location: /admin/dashboard.php");
+        exit();
+    } else {
+        header("Location: /home.php");
+        exit();
+    }
+}
+?>
+<?php include_once __DIR__ . '/includes/header.php'; ?>
 
 <div class="row justify-content-center">
     <div class="col-md-6 col-lg-4">
@@ -22,4 +37,4 @@
     </div>
 </div>
 
-<?php include __DIR__ . '/includes/footer.php'; ?>
+<?php include_once __DIR__ . '/includes/footer.php'; ?>
