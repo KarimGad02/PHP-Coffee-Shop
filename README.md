@@ -1,25 +1,24 @@
-# Users Management API (Admin / Customer)
 
-Simple native PHP backend for a training project focused only on:
-- Authentication
-- Users CRUD
-- Two roles: admin and customer
+# Cafeteria Management System
 
-Database is local SQLite for zero-setup development.
+A native PHP full-stack application built for an ITI training project. This system handles role-based authentication (Admin/Customer), product catalog management, and order processing using a localized SQLite database.
 
-## What's done So far
+## Architecture & Current Status (Phase 1 Complete)
 
-1. Users Model, Controllers, and Routes.
-2. Authentication for Logging in.
-3. Added plug-and-play setup scripts so others can run quickly after clone.
+The core foundation of the application is fully established:
+1. **Fully Normalized Database:** SQLite tables for Rooms, Categories, Products, Users, Orders, and Order Items.
+2. **Core Data Models:** OOP classes mapping to the database (`User.php`, `Room.php`, `Category.php`, `Product.php`).
+3. **Global UI Template:** A unified Bootstrap 5 layout using PHP includes (`header.php`, `footer.php`) and a custom glassmorphism CSS theme.
+4. **Authentication Flow:** Secure login, simulated password recovery, and strict session-based role routing.
+5. **Plug-and-Play Environment:** Automated setup scripts for instant local deployment.
 
 ## Tech Stack
 
-- PHP 8+
-- PDO + SQLite
-- Plain PHP routing and controllers
+- **Backend:** PHP 8+, PDO, custom routing architecture.
+- **Database:** SQLite (Zero-setup).
+- **Frontend:** HTML5, Bootstrap 5, Vanilla JavaScript (Fetch API), Custom CSS.
 
-## Current Project Structure
+## Project Structure
 
 ```text
 PHP-Coffee-Shop/
@@ -31,15 +30,30 @@ PHP-Coffee-Shop/
 │   │   ├── AdminUserController.php
 │   │   └── UserController.php
 │   ├── models/
+│   │   ├── Category.php
+│   │   ├── Product.php
+│   │   ├── Room.php
 │   │   └── User.php
 │   └── routes/
 │       └── web.php
 ├── public/
-│   └── index.php
+│   ├── admin/
+│   │   └── dashboard.php
+│   ├── css/
+│   │   └── style.css
+│   ├── includes/
+│   │   ├── footer.php
+│   │   └── header.php
+│   ├── js/
+│   │   └── app.js
+│   ├── forgot-password.php
+│   ├── login.php
+│   └── reset-password.php
 ├── scripts/
 │   ├── setup.bat
 │   └── start.bat
 ├── storage/
+│   └── cafeteria.sqlite (Generated)
 ├── database.sql
 ├── setup.php
 └── README.md
@@ -49,71 +63,74 @@ PHP-Coffee-Shop/
 
 ### Option A (Windows batch scripts)
 
-1. Setup:
+1. Setup the environment and database:
 ```bat
 scripts\setup.bat
 ```
 
-2. Start server:
+2. Start the local server:
 ```bat
 scripts\start.bat
 ```
 
 ### Option B (Direct PHP commands)
 
-1. Setup:
+1. Initialize the SQLite Database:
 ```bash
 php setup.php
 ```
 
-2. Start server:
+2. Start the PHP Server:
 ```bash
 php -S localhost:8000 -t public
 ```
 
 ## Fresh Reset (Optional)
 
-If you want a clean database:
+If you need a clean database during development to wipe all test data:
 
 ```bash
 php setup.php --fresh
 ```
-
-This recreates `storage/cafeteria.sqlite` and re-runs schema seed data.
+*Note: This drops all tables, recreates `storage/cafeteria.sqlite`, and inserts the seed data (default rooms and the admin account).*
 
 ## Default Admin Account
 
-- Email: admin@cafeteria.com
-- Password: admin123
+- **Email:** admin@cafeteria.com
+- **Password:** admin123
 
-## API Endpoints
+## UI Routes (Frontend)
+
+- `/login.php` - System entry point.
+- `/forgot-password.php` - Simulated email recovery.
+- `/reset-password.php` - Secure token password update.
+- `/admin/dashboard.php` - Protected admin landing page.
+
+## API Endpoints (Backend)
 
 ### Auth
-
-- POST `/auth/login`
-- POST `/auth/logout`
-- POST `/auth/register` (creates customer)
-- POST `/auth/forgot-password`
-- GET `/auth/me`
+- `POST /auth/login`
+- `POST /auth/logout`
+- `POST /auth/register`
+- `POST /auth/forgot-password`
+- `POST /auth/reset-password`
+- `GET /auth/me`
 
 ### Customer Self CRUD
-
-- GET `/users/me`
-- PUT `/users/me`
-- DELETE `/users/me`
+- `GET /users/me`
+- `PUT /users/me`
+- `DELETE /users/me`
 
 ### Admin Users CRUD
-
-- GET `/admin/users`
-- POST `/admin/users`
-- GET `/admin/users/:id`
-- PUT `/admin/users/:id`
-- DELETE `/admin/users/:id`
+- `GET /admin/users`
+- `POST /admin/users`
+- `GET /admin/users/:id`
+- `PUT /admin/users/:id`
+- `DELETE /admin/users/:id`
 
 ## Request Examples
 
 ### Login
-
 ```json
 POST /auth/login
 {
@@ -123,52 +140,27 @@ POST /auth/login
 ```
 
 ### Create Customer (Admin)
-
+*Note: Users are now tied relationally to the `rooms` table via `room_id`.*
 ```json
 POST /admin/users
 {
   "name": "Sara Ali",
   "email": "sara@example.com",
   "password": "123456",
-  "room_number": "203",
-  "extension": "4567",
+  "room_id": 2,
   "role": "customer"
 }
 ```
 
-### Update My Profile
-
-```json
-PUT /users/me
-{
-  "name": "Updated Name",
-  "email": "me@example.com",
-  "room_number": "305",
-  "extension": "5555",
-  "password": ""
-}
-```
-
-## Notes
-
-- Role is limited to `admin` or `customer`.
-- Admin-only routes enforce session role checks.
-
 ## Troubleshooting
 
-### Error: could not find driver
+### Error: "could not find driver"
+Enable the required SQLite extensions in your `php.ini` file:
+- `extension=pdo_sqlite`
+- `extension=sqlite3`
+*(Restart your PHP server after saving changes).*
 
-Enable in `php.ini`:
-- extension=pdo_sqlite
-- extension=sqlite3
-
-Then restart PHP.
-
-### DB not initializing
-
-- Ensure `storage/` is writable
-- Run `php setup.php --fresh`
-
-## License
-
-This project is part of ITI training work.
+### Database Not Initializing / White Screens
+- Ensure the `storage/` directory has write permissions.
+- Ensure all root-level PHP files use `__DIR__` for includes (e.g., `include __DIR__ . '/includes/header.php';`).
+- Run `php setup.php --fresh`.
