@@ -102,6 +102,7 @@ function defineRoutes($router) {
     $router->register('POST', '/auth/logout', 'AuthController', 'logout');
     $router->register('POST', '/auth/register', 'AuthController', 'register');
     $router->register('POST', '/auth/forgot-password', 'AuthController', 'forgotPassword');
+    $router->register('POST', '/auth/reset-password', 'AuthController', 'resetPassword');
     $router->register('GET', '/auth/me', 'AuthController', 'me');
 
     // Customer self CRUD
