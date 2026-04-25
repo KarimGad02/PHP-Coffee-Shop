@@ -82,4 +82,4 @@ INSERT INTO rooms (name, extension) VALUES ('room 2010', '5605');
 -- Insert default admin user (Password: admin123)
 -- Make sure to paste the exact $2y$ hash you generated earlier here!
 INSERT INTO users (name, email, password, role, room_id) VALUES 
-('admin user', 'admin@cafeteria.com', 'admin123', 'admin', 1);
+('admin user', 'admin@cafeteria.com', '$2y$10$9iFpmbwRGWr2BXar4hFEuewPKELkKNjOCWJc5yxlzPuCiNGMXbHWK', 'admin', 1);

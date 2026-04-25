@@ -1,4 +1,5 @@
-</div> <footer class="text-center py-3 mt-auto" style="color: rgba(255, 255, 255, 0.5); font-size: 0.8rem;">
+    </div>
+    <footer class="text-center py-3 mt-auto" style="color: rgba(255, 255, 255, 0.5); font-size: 0.8rem;">
         &copy; <?php echo date('Y'); ?> Cafeteria System.
     </footer>
 

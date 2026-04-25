@@ -1,7 +1,7 @@
-/* Import Montserrat Font */
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
-/* Reset default browser margins */
+
 * {
     margin: 0;
     padding: 0;
@@ -10,11 +10,11 @@
 }
 
 body {
-    /* Deep Icy Blue/Navy Background */
+  
     background:linear-gradient(135deg, #041527 0%, #0E3052 100%);
     min-height: 100vh;
     
-    /* Flexbox to perfectly center the card */
+  
     color: #ffffff;
 }
 
@@ -38,7 +38,7 @@ body {
     margin-bottom: 35px;
     font-weight: 700;
     letter-spacing: 2px;
-    color: #E0F2FE; /* Light icy cyan text */
+    color: #E0F2FE; 
 }
 
 form {
@@ -65,13 +65,13 @@ input::placeholder {
 }
 
 input:focus {
-    border-color: #00B4D8; /* Icy cyan glow on focus */
+    border-color: #00B4D8; 
     background: rgba(0, 0, 0, 0.4);
     box-shadow: 0 0 10px rgba(0, 180, 216, 0.2);
 }
 
 button {
-    /* Mammut High-Visibility Orange/Red */
+    
     background: #FF3300;
     color: #ffffff;
     border: none;
@@ -87,11 +87,11 @@ button {
 }
 
 button:hover {
-    background: #E62E00; /* Slightly darker on hover */
+    background: #E62E00;
 }
 
 button:active {
-    transform: scale(0.98); /* Satisfying click effect */
+    transform: scale(0.98); 
 }
 
 #errorMessage {
@@ -99,4 +99,29 @@ button:active {
     color: #FF6B6B; 
     font-size: 14px;
     font-weight: 600;
+}
+
+
+.glass-card {
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 2rem;
+    color: white;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+
+.table-glass {
+    color: white;
+    background: transparent;
+}
+.table-glass th {
+    border-bottom: 1px solid rgba(255, 87, 34, 0.5); /* Orange accent underline */
+    color: #E0F2FE;
+}
+.table-glass td {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }

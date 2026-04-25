@@ -135,4 +135,13 @@ if (resetForm) {
         })
         .catch(error => console.error('Error:', error));
     });
+
+// 4. GLOBAL LOGOUT FLOW
+function logoutSystem() {
+    fetch('/auth/logout', { method: 'POST' })
+    .then(() => {
+        window.location.href = '/login.php';
+    })
+    .catch(error => console.error('Error logging out:', error));
+}
 }
