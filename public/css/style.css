@@ -1,0 +1,105 @@
+/* Import Montserrat Font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+/* Reset default browser margins */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    /* Deep Icy Blue/Navy Background */
+    background:linear-gradient(135deg, #041527 0%, #0E3052 100%);
+    min-height: 100vh;
+    
+    /* Flexbox to perfectly center the card */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+}
+
+.login-container {
+    /* Glassmorphism Effect */
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    
+    /* Card Layout */
+    border-radius: 16px;
+    padding: 50px 40px;
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+}
+
+.login-container h2 {
+    margin-bottom: 35px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #E0F2FE; /* Light icy cyan text */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+input {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 16px;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.3s ease;
+
+}
+
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+input:focus {
+    border-color: #00B4D8; /* Icy cyan glow on focus */
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 10px rgba(0, 180, 216, 0.2);
+}
+
+button {
+    /* Mammut High-Visibility Orange/Red */
+    background: #FF3300;
+    color: #ffffff;
+    border: none;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.1s ease;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #E62E00; /* Slightly darker on hover */
+}
+
+button:active {
+    transform: scale(0.98); /* Satisfying click effect */
+}
+
+#errorMessage {
+    margin-top: 25px;
+    color: #FF6B6B; 
+    font-size: 14px;
+    font-weight: 600;
+}
