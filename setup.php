@@ -64,6 +64,6 @@ $count = (int)($stmt->fetch()['c'] ?? 0);
 echo "[OK] Database is ready. Users seeded: " . $count . "\n";
 
 echo "\nDone. Next steps:\n";
-echo "- Start server: php -S localhost:8000 -t public\n";
-echo "- Test endpoint: http://localhost:8000/auth/me\n";
-echo "- Default admin: admin@cafeteria.com / admin123\n";
+echo "- Start server: php -S localhost:8000 -t public public/router.php\n";
+echo "- Test endpoint: http://localhost:8000/login.php\n";
+echo "- Default admin: admin@cafeteria.com / admin12345\n";

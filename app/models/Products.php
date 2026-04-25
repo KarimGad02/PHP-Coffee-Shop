@@ -26,6 +26,19 @@ class Product {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // Get product by id
+    public function getById($id) {
+        $query = "SELECT p.id, p.name, p.price, p.image, p.is_available, p.category_id, c.name as category_name
+                  FROM " . $this->table . " p
+                  LEFT JOIN categories c ON p.category_id = c.id
+                  WHERE p.id = :id
+                  LIMIT 1";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     // Get ONLY available products (Customer Menu View)
     public function getAvailable() {
         $query = "SELECT p.id, p.name, p.price, p.image, p.category_id, c.name as category_name 
@@ -52,9 +65,51 @@ class Product {
         $stmt->bindParam(':category_id', $this->category_id);
 
         if ($stmt->execute()) {
-            return ['success' => true];
+            return ['success' => true, 'id' => $this->conn->lastInsertId()];
         }
-        return ['success' => false];
+        return ['success' => false, 'message' => 'Could not create product'];
+    }
+
+    // Update product
+    public function update() {
+        if (empty($this->id)) {
+            return ['success' => false, 'message' => 'Product ID is required'];
+        }
+
+        $query = "UPDATE " . $this->table . "
+                  SET name = :name,
+                      price = :price,
+                      image = :image,
+                      is_available = :is_available,
+                      category_id = :category_id
+                  WHERE id = :id";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':name', $this->name);
+        $stmt->bindParam(':price', $this->price);
+        $stmt->bindParam(':image', $this->image);
+        $stmt->bindParam(':is_available', $this->is_available);
+        $stmt->bindParam(':category_id', $this->category_id);
+        $stmt->bindParam(':id', $this->id);
+
+        if ($stmt->execute()) {
+            return ['success' => true, 'message' => 'Product updated successfully'];
+        }
+
+        return ['success' => false, 'message' => 'Could not update product'];
+    }
+
+    // Delete product
+    public function delete($id) {
+        $query = "DELETE FROM " . $this->table . " WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id);
+
+        if ($stmt->execute()) {
+            return ['success' => true, 'message' => 'Product deleted successfully'];
+        }
+
+        return ['success' => false, 'message' => 'Could not delete product'];
     }
     
     

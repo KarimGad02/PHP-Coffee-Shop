@@ -19,6 +19,9 @@ if (session_status() === PHP_SESSION_NONE) {
     <nav class="navbar navbar-expand-lg" style="background-color: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
         <div class="container">
             <a class="navbar-brand fw-bold text-uppercase" style="color: #FF3300; letter-spacing: 1px;" href="/">Cafeteria</a>
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <button class="btn btn-sm btn-outline-warning logout-btn" type="button">Logout</button>
+            <?php endif; ?>
         </div>
     </nav>
 

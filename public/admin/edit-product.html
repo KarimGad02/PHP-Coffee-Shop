@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product - Cafeteria Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body data-page="edit-product" class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-uppercase" href="/admin/dashboard.php">Cafeteria Admin</a>
+            <div class="d-flex gap-2">
+                <a class="btn btn-sm btn-outline-light" href="/admin/all-products.html">All Products</a>
+                <a class="btn btn-sm btn-outline-light" href="/admin/add-product.html">Add Product</a>
+                <button class="btn btn-sm btn-outline-warning logout-btn" type="button">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5 flex-grow-1">
+        <h2 class="fw-bold mb-4 section-title">Edit Product</h2>
+
+        <div class="row g-4">
+            <div class="col-lg-7">
+                <div class="glass-card p-4">
+                    <form id="editProductForm" enctype="multipart/form-data">
+                        <input type="hidden" id="productId" name="id">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Product Name</label>
+                                <input class="form-control" type="text" id="name" name="name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Price</label>
+                                <input class="form-control" type="number" step="0.01" min="0" id="price" name="price" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Category</label>
+                                <select class="form-select" id="category_id" name="category_id"></select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Availability</label>
+                                <select class="form-select" id="is_available" name="is_available">
+                                    <option value="1">Available</option>
+                                    <option value="0">Unavailable</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Product Image</label>
+                                <input class="form-control" type="file" name="image" accept="image/*">
+                                <img id="productImagePreview" alt="Product preview" style="display:none; max-width:160px; margin-top:12px; border-radius:12px; border:1px solid rgba(255,255,255,0.15);">
+                            </div>
+                        </div>
+
+                        <div class="mt-4 d-flex gap-2">
+                            <button class="btn btn-coffee-primary" type="submit">Save Changes</button>
+                            <a class="btn btn-coffee-secondary" href="/admin/all-products.html">Cancel</a>
+                        </div>
+                    </form>
+                    <div id="productEditMessage" style="display:none;"></div>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="glass-card">
+                    <h5 class="mb-3" style="color:var(--accent-cream);">Notes</h5>
+                    <p class="mb-0" style="color:var(--text-muted);">Leave the image field empty if you do not want to replace the current one.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center py-3 mt-auto">
+        &copy; 2026 Cafeteria System.
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/admin-management.js"></script>
+</body>
+</html>

@@ -19,6 +19,9 @@ CREATE TABLE IF NOT EXISTS users (
     password TEXT NOT NULL,
     role TEXT DEFAULT 'customer',
     room_id INTEGER, -- Default room
+    room_number TEXT,
+    extension TEXT,
+    profile_image TEXT,
     created_at TEXT DEFAULT CURRENT_TIMESTAMP,
     updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE SET NULL,
@@ -79,7 +82,7 @@ CREATE TABLE IF NOT EXISTS order_items (
 INSERT INTO rooms (name, extension) VALUES ('admin office', '0000');
 INSERT INTO rooms (name, extension) VALUES ('room 2010', '5605');
 
--- Insert default admin user (Password: admin123)
+-- Insert default admin user (Password: admin12345)
 -- Make sure to paste the exact $2y$ hash you generated earlier here!
 INSERT INTO users (name, email, password, role, room_id) VALUES 
 ('admin user', 'admin@cafeteria.com', '$2y$10$9iFpmbwRGWr2BXar4hFEuewPKELkKNjOCWJc5yxlzPuCiNGMXbHWK', 'admin', 1);

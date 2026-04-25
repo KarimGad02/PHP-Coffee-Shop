@@ -31,7 +31,7 @@ PHP-Coffee-Shop/
 │   │   └── UserController.php
 │   ├── models/
 │   │   ├── Category.php
-│   │   ├── Product.php
+│   │   ├── Products.php
 │   │   ├── Room.php
 │   │   └── User.php
 │   └── routes/
@@ -82,7 +82,7 @@ php setup.php
 
 2. Start the PHP Server:
 ```bash
-php -S localhost:8000 -t public
+php -S localhost:8000 -t public public/router.php
 ```
 
 ## Fresh Reset (Optional)
@@ -97,7 +97,7 @@ php setup.php --fresh
 ## Default Admin Account
 
 - **Email:** admin@cafeteria.com
-- **Password:** admin123
+- **Password:** admin12345
 
 ## UI Routes (Frontend)
 

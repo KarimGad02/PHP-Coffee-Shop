@@ -116,4 +116,15 @@ function defineRoutes($router) {
     $router->register('GET', '/admin/users/:id', 'AdminUserController', 'getUserById');
     $router->register('PUT', '/admin/users/:id', 'AdminUserController', 'updateUser');
     $router->register('DELETE', '/admin/users/:id', 'AdminUserController', 'deleteUser');
+    $router->register('GET', '/admin/stats', 'AdminUserController', 'getDashboardStats');
+
+    // Admin products and categories CRUD
+    $router->register('GET', '/admin/products', 'AdminProductController', 'getAllProducts');
+    $router->register('POST', '/admin/products', 'AdminProductController', 'createProduct');
+    $router->register('GET', '/admin/products/:id', 'AdminProductController', 'getProductById');
+    $router->register('PUT', '/admin/products/:id', 'AdminProductController', 'updateProduct');
+    $router->register('DELETE', '/admin/products/:id', 'AdminProductController', 'deleteProduct');
+
+    $router->register('GET', '/admin/categories', 'AdminProductController', 'getAllCategories');
+    $router->register('POST', '/admin/categories', 'AdminProductController', 'createCategory');
 }

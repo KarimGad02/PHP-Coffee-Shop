@@ -135,6 +135,7 @@ if (resetForm) {
         })
         .catch(error => console.error('Error:', error));
     });
+}
 
 // 4. GLOBAL LOGOUT FLOW
 function logoutSystem() {
@@ -144,4 +145,38 @@ function logoutSystem() {
     })
     .catch(error => console.error('Error logging out:', error));
 }
+
+// 5. DASHBOARD COUNTERS
+function loadAdminDashboardStats() {
+    const activeOrdersEl = document.getElementById('activeOrdersCount');
+    const totalProductsEl = document.getElementById('totalProductsCount');
+    const registeredUsersEl = document.getElementById('registeredUsersCount');
+
+    if (!activeOrdersEl || !totalProductsEl || !registeredUsersEl) {
+        return;
+    }
+
+    fetch('/admin/stats', {
+        method: 'GET',
+        credentials: 'same-origin'
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (!data.success || !data.data) {
+            return;
+        }
+
+        activeOrdersEl.textContent = String(data.data.active_orders ?? 0);
+        totalProductsEl.textContent = String(data.data.total_products ?? 0);
+        registeredUsersEl.textContent = String(data.data.registered_users ?? 0);
+    })
+    .catch(error => console.error('Error loading dashboard stats:', error));
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    loadAdminDashboardStats();
+
+    document.querySelectorAll('.logout-btn').forEach((btn) => {
+        btn.addEventListener('click', logoutSystem);
+    });
+});

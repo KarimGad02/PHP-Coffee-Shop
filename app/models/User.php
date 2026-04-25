@@ -21,7 +21,7 @@ class User {
 
     // Get all users
     public function getAll() {
-        $query = "SELECT id, name, email, room_number, extension, role, created_at FROM " . $this->table;
+        $query = "SELECT id, name, email, room_number, extension, profile_image, role, created_at FROM " . $this->table;
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -58,8 +58,8 @@ class User {
         $hashedPassword = password_hash($this->password, PASSWORD_BCRYPT);
 
         $query = "INSERT INTO " . $this->table . " 
-                  (name, email, password, room_number, extension, role) 
-                  VALUES (:name, :email, :password, :room_number, :extension, :role)";
+              (name, email, password, room_number, extension, profile_image, role) 
+              VALUES (:name, :email, :password, :room_number, :extension, :profile_image, :role)";
 
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':name', $this->name);
@@ -67,6 +67,7 @@ class User {
         $stmt->bindParam(':password', $hashedPassword);
         $stmt->bindParam(':room_number', $this->room_number);
         $stmt->bindParam(':extension', $this->extension);
+        $stmt->bindParam(':profile_image', $this->profile_image);
         $stmt->bindParam(':role', $this->role);
 
         if ($stmt->execute()) {
@@ -87,6 +88,7 @@ class User {
                   email = :email, 
                   room_number = :room_number, 
                   extension = :extension, 
+                  profile_image = :profile_image,
                   role = :role";
 
         if (!empty($this->password)) {
@@ -100,6 +102,7 @@ class User {
         $stmt->bindParam(':email', $this->email);
         $stmt->bindParam(':room_number', $this->room_number);
         $stmt->bindParam(':extension', $this->extension);
+        $stmt->bindParam(':profile_image', $this->profile_image);
         $stmt->bindParam(':role', $this->role);
         $stmt->bindParam(':id', $this->id);
 
