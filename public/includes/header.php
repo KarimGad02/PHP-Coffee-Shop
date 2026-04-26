@@ -53,10 +53,13 @@ if (!isset($_SESSION['user_id']) && !in_array($currentPage, $publicPages)) {
                         
                         <li class="nav-item dropdown ms-lg-3">
                             <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: var(--text-main);">
-                                <img src="/images/default-avatar.png" alt="Profile" class="rounded-circle" style="width: 35px; height: 35px; object-fit: cover; border: 2px solid var(--accent-primary);">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="var(--accent-primary)" viewBox="0 0 16 16">
+                                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                                </svg>
                                 <span class="fw-semibold"><?= htmlspecialchars($_SESSION['user_name']) ?></span>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="userDropdown" style="background: rgba(35, 22, 18, 0.95); border: 1px solid var(--glass-border);">
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark mt-2" aria-labelledby="userDropdown" style="background: rgba(35, 22, 18, 0.95); border: 1px solid var(--glass-border);">
                                 <li>
                                     <button class="dropdown-item text-danger" onclick="logout()">Logout</button>
                                 </li>
@@ -80,4 +83,4 @@ if (!isset($_SESSION['user_id']) && !in_array($currentPage, $publicPages)) {
         }
     </script>
 
-    <div class="container flex-grow-1 d-flex flex-column py-4">
+    <div class="container flex-grow-1 d-flex flex-column justify-content-center py-5">
