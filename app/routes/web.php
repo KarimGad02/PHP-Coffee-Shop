@@ -110,6 +110,13 @@ function defineRoutes($router) {
     $router->register('PUT', '/users/me', 'UserController', 'updateMe');
     $router->register('DELETE', '/users/me', 'UserController', 'deleteMe');
 
+    // Customer Menu & Ordering Routes
+    $router->register('GET', '/api/menu', 'ProductController', 'getMenu');
+    $router->register('GET', '/api/orders/latest', 'OrderController', 'getLatestOrder');
+    $router->register('POST', '/api/orders', 'OrderController', 'placeOrder');
+    $router->register('GET', '/api/orders', 'OrderController', 'getMyOrders');
+    $router->register('POST', '/api/orders/:id/cancel', 'OrderController', 'cancelOrder');
+
     // Admin users CRUD
     $router->register('GET', '/admin/users', 'AdminUserController', 'getAllUsers');
     $router->register('POST', '/admin/users', 'AdminUserController', 'createUser');
