@@ -15,7 +15,7 @@ $rooms = (new Room($db))->getAll();
             <h4 class="section-title mb-4">My Cart</h4>
             
             <div id="cart-items" class="flex-grow-1 mb-3">
-                <p class="text-muted small">Your cart is empty. Click a product to add it!</p>
+                <p class="small">Your cart is empty. Click a product to add it!</p>
             </div>
 
             <div class="mt-auto border-top pt-3" style="border-color: var(--glass-border) !important;">

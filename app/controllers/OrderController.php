@@ -56,8 +56,21 @@ class OrderController {
     }
 
     // Cancel an order
-    public function cancelOrder($user_id, $order_id) {
-        return $this->orderModel->cancelOrder($order_id, $user_id);
+    public function cancelOrder($id) {
+        // Ensure the session is started so we can access $_SESSION
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // Get the user ID securely from the backend session, NOT the frontend
+        if (!isset($_SESSION['user_id'])) {
+            return ['success' => false, 'message' => 'Unauthorized. Please log in.', 'code' => 401];
+        }
+
+        $user_id = $_SESSION['user_id'];
+
+        // Pass both to the model (the route provides $id, the session provides $user_id)
+        return $this->orderModel->cancelOrder($id, $user_id);
     }
     
     // Get the latest order for the Home page

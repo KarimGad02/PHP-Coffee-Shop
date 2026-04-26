@@ -44,12 +44,31 @@ if (!isset($_SESSION['user_id']) && !in_array($currentPage, $publicPages)) {
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <ul class="navbar-nav align-items-center gap-3">
-                        <li class="nav-item">
-                            <a class="nav-link <?= $currentPage === 'home.php' ? 'active' : '' ?>" href="home.php" style="<?= $currentPage === 'home.php' ? 'color: var(--accent-secondary) !important;' : 'color: var(--text-muted);' ?>">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?= $currentPage === 'my-orders.php' ? 'active' : '' ?>" href="my-orders.php" style="<?= $currentPage === 'my-orders.php' ? 'color: var(--accent-secondary) !important;' : 'color: var(--text-muted);' ?>">My Orders</a>
-                        </li>
+                        
+                        <?php if ($_SESSION['user_role'] === 'admin'): ?>
+                            <li class="nav-item">
+                                <a class="nav-link <?= strpos($currentPage, 'dashboard.php') !== false ? 'active' : '' ?>" href="/admin/dashboard.php" style="<?= strpos($currentPage, 'dashboard.php') !== false ? 'color: var(--accent-secondary) !important;' : 'color: var(--text-muted);' ?>">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin/products.php" style="color: var(--text-muted);">Products</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin/users.php" style="color: var(--text-muted);">Users</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin/manual-order.php" style="color: var(--text-muted);">Manual Order</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin/checks.php" style="color: var(--text-muted);">Checks</a>
+                            </li>
+                        <?php else: ?>
+                            <li class="nav-item">
+                                <a class="nav-link <?= $currentPage === 'home.php' ? 'active' : '' ?>" href="/home.php" style="<?= $currentPage === 'home.php' ? 'color: var(--accent-secondary) !important;' : 'color: var(--text-muted);' ?>">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link <?= $currentPage === 'my-orders.php' ? 'active' : '' ?>" href="/my-orders.php" style="<?= $currentPage === 'my-orders.php' ? 'color: var(--accent-secondary) !important;' : 'color: var(--text-muted);' ?>">My Orders</a>
+                            </li>
+                        <?php endif; ?>
                         
                         <li class="nav-item dropdown ms-lg-3">
                             <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: var(--text-main);">
@@ -77,7 +96,7 @@ if (!isset($_SESSION['user_id']) && !in_array($currentPage, $publicPages)) {
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {
-                        window.location.href = 'login.php';
+                        window.location.href = '/login.php';
                     }
                 });
         }
